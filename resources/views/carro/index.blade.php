@@ -31,8 +31,11 @@
                                 <td>{{ $carro->marca }}</td>
                                 <td>{{ $carro->ano }}</td>
                                 <td>
-                                    <button class="btn btn-info">Alterar</button>
-                                    <button class="btn btn-info">Excluir</button>
+                                    <a class="btn btn-info" href="{{ route('admin.carro.edit', ['id' => $carro->id]) }}">Alterar</a>
+                                    <form style="display:inline-block;"
+                                        action="{{ route('admin.carro.destroy', ['id' => $carro->id]) }}" method="POST">
+                                        <button class="btn btn-info"> Excluir</button>
+                                    </form>
                                 </td>
                             </tr>
                         @endforeach

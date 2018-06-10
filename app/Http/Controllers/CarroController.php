@@ -24,7 +24,7 @@ class CarroController extends Controller
      */
     public function index()
     {
-        $carros = Car::all();
+        $carros = Car::orderBy('id', 'asc')->get();
         return view('carro.index',[
             "carros" => $carros
         ]);
@@ -35,11 +35,32 @@ class CarroController extends Controller
         return view('carro.create');
     }
 
-    public function store()
+    public function store(Request $request)
     {
+        // var_dump($request->all());exit;
+        $id['id'] = $request->all()['id'];
         $Car = new Car();
-        $Car->create($request->all());
 
+        $Car->updateOrCreate(
+            $id,
+            $request->all());
+        // echo '$Car->create($request->all());';
+        
+    }
+
+    public function edit(Request $request, $id)
+    {
+        $car = Car::find($id);
+        // var_dump($car);exit;
+        return view('carro.edit', 
+            ['car' => $car]);
+    }
+
+    public function destroy(Request $request, $id)
+    {
+        $car = Car::find($id);
+        var_dump($car);exit;
+        $car->destroy();
         return redirect()->route('admin.carro.index');
     }
 }
