@@ -32,5 +32,9 @@ Route::group(['prefix'=>'admin', 'as'=>'admin.'],function(){
 
     Route::get('/home', 'HomeController@index')->name('home');
 
+    //Carro
+    Route::get('carro', 'CarroController@index')->name('carro.index');
+    Route::get('carro/create', 'CarroController@create')->name('carro.create');
+    Route::get('carro/store', 'CarroController@store')->name('carro.store');
 
 });
