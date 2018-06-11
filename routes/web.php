@@ -33,13 +33,7 @@ Route::group(['prefix'=>'admin', 'as'=>'admin.'],function(){
     Route::get('/home', 'HomeController@index')->name('home');
 
     //Carro
-    // Route::resource('carro', 'CarroController')->only([
-    //     'index', 'show', 'destroy'
-    // ]);
-    Route::get('carro', 'CarroController@index')->name('carro.index');
-    Route::get('carro/create', 'CarroController@create')->name('carro.create');
-    Route::post('carro/store', 'CarroController@store')->name('carro.store');
-    Route::get('carro/{id}/edit', 'CarroController@edit')->name('carro.edit');
-    Route::post('carro/{id}', 'CarroController@destroy')->name('carro.destroy');
+    Route::resource('car', 'CarController');
+    
 
 });
