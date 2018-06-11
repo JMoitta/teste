@@ -3,10 +3,21 @@
 namespace FederalSt\Http\Controllers;
 
 use FederalSt\Car;
+use FederalSt\User;
 use Illuminate\Http\Request;
 
 class CarController extends Controller
 {
+    /**
+     * Create a new controller instance.
+     *
+     * @return void
+     */
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -15,6 +26,7 @@ class CarController extends Controller
     public function index()
     {
         $carros = Car::orderBy('id', 'asc')->get();
+        $users = User::all()->toArray();
         return view('carro.index',[
             "carros" => $carros
         ]);
@@ -65,8 +77,11 @@ class CarController extends Controller
     public function edit($id)
     {
         $car = Car::find($id);
-        return view('carro.edit',
-            ['car' => $car]);
+        $users = User::all();
+        return view('carro.edit',[
+            'car' => $car,
+            "users" => $users
+        ]);
     }
 
     /**
@@ -79,8 +94,12 @@ class CarController extends Controller
     public function update(Request $request, $id)
     {
         $idArray = ['id' => $id];
-        
-        Car::updateOrCreate($idArray, $request->all());
+        // var_dump($request->all());exit;
+        $user = User::find($request->all()['user_id']);
+        $car = Car::updateOrCreate($idArray, $request->all());
+
+        $car->user()->associate($user);
+        $car->save();
         return redirect()->route('admin.car.index');
     }
 

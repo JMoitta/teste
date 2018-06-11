@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class UpdateCarsTable extends Migration
+class CreatePostsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,8 +13,11 @@ class UpdateCarsTable extends Migration
      */
     public function up()
     {
-        Schema::table('cars', function (Blueprint $table) {
-            $table->string('renavam', 20)->change();
+        Schema::create('posts', function (Blueprint $table) {
+            $table->increments('id');
+            $table->string('title');
+            $table->string('content');
+            $table->timestamps();
         });
     }
 
@@ -25,8 +28,6 @@ class UpdateCarsTable extends Migration
      */
     public function down()
     {
-        Schema::table('cars', function (Blueprint $table) {
-            $table->integer('renavam')->change();
-        });
+        Schema::dropIfExists('posts');
     }
 }

@@ -13,6 +13,15 @@
                         <input type="hidden" name="id" value="{{ $car->id }}">
                         @method('PUT')
                         <div class="form-group">
+                            <label for="user_id">Proprietário</label>
+                            <select class="form-control" id="user_id" name="user_id" required>
+                                <option value="optionSelect" disabled selected>Proprietário</option>
+                                @foreach($users as $user)
+                                    <option value="{{ $user->id }}" >{{ $user->email }}</option>
+                                @endforeach
+                            </select>
+                        </div>
+                        <div class="form-group">
                             <label for="placa">placa</label>
                             <input type="text" name="placa" value="{{ $car->placa }}" class="form-control" id="placa" aria-describedby="placaHelp" placeholder="AAA-1111">
                             <small id="placaHelp" class="form-text text-muted">Exemplo: AAA-1111.</small>

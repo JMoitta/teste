@@ -14,7 +14,10 @@ class UpdateCarsTable extends Migration
     public function up()
     {
         Schema::table('cars', function (Blueprint $table) {
-            $table->string('renavam', 20)->change();
+            $table->integer('user_id')->unsigned()->nullable();
+
+            $table->foreign('user_id')->references('id')->on('users')
+                ->onUpdate('cascade')->onDelete('cascade');
         });
     }
 
@@ -26,7 +29,7 @@ class UpdateCarsTable extends Migration
     public function down()
     {
         Schema::table('cars', function (Blueprint $table) {
-            $table->integer('renavam')->change();
+            $table->dropColumn('user_id');
         });
     }
 }
