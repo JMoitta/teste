@@ -37,15 +37,11 @@ class CarroController extends Controller
 
     public function store(Request $request)
     {
-        // var_dump($request->all());exit;
-        $id['id'] = $request->all()['id'];
-        $Car = new Car();
-
-        $Car->updateOrCreate(
-            $id,
-            $request->all());
-        // echo '$Car->create($request->all());';
+        $car = new Car();
         
+        $car->placa = $request;
+        // echo '$Car->create($request->all());';
+        return redirect()->route('admin.carro.index');
     }
 
     public function edit(Request $request, $id)
