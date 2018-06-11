@@ -8,7 +8,7 @@
                 <div class="card-header">Formulario de Carro</div>
 
                 <div class="card-body">
-                    <form action="{{ route('admin.carro.store') }}" method="post">
+                    <form action="{{ route('admin.car.store') }}" method="post">
                         <input type="hidden" name="_token" value="{{ csrf_token() }}">
                         <div class="form-group">
                             <label for="placa">placa</label>

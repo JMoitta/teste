@@ -8,9 +8,10 @@
                 <div class="card-header">Formulario de Carro</div>
 
                 <div class="card-body">
-                    <form action="{{ route('admin.carro.store') }}" method="post">
+                    <form action="{{ route('admin.car.update', ['id' => $car->id]) }}" method="post">
                         <input type="hidden" name="_token" value="{{ csrf_token() }}">
                         <input type="hidden" name="id" value="{{ $car->id }}">
+                        @method('PUT')
                         <div class="form-group">
                             <label for="placa">placa</label>
                             <input type="text" name="placa" value="{{ $car->placa }}" class="form-control" id="placa" aria-describedby="placaHelp" placeholder="AAA-1111">

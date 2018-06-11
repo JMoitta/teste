@@ -9,7 +9,7 @@
 
                 <div class="card-body">
                     <div class="pb-3">
-                        <a class="btn btn-primary" href="{{ route('admin.carro.create') }}">Novo</a>
+                        <a class="btn btn-primary" href="{{ route('admin.car.create') }}">Novo</a>
                     </div>
                     <table class="table">
                         <thead>
@@ -31,9 +31,11 @@
                                 <td>{{ $carro->marca }}</td>
                                 <td>{{ $carro->ano }}</td>
                                 <td>
-                                    <a class="btn btn-info" href="{{ route('admin.carro.edit', ['id' => $carro->id]) }}">Alterar</a>
+                                    <a class="btn btn-info" href="{{ route('admin.car.edit', ['id' => $carro->id]) }}">Alterar</a>
                                     <form style="display:inline-block;"
-                                        action="{{ route('admin.carro.destroy', ['id' => $carro->id]) }}" method="POST">
+                                        action="{{ route('admin.car.destroy', ['id' => $carro->id]) }}" method="POST">
+                                        @method('DELETE')
+                                        <input type="hidden" name="_token" value="{{ csrf_token() }}">
                                         <button class="btn btn-info"> Excluir</button>
                                     </form>
                                 </td>
